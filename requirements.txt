@@ -1,0 +1,3 @@
+pyobjc-framework-Cocoa 
+pyobjc-framework-AVFoundation 
+pyobjc-framework-Quartz
