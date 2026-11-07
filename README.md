@@ -25,6 +25,8 @@ Move your .mp4 into `~/Movies`
 Copy/Move `com.me.livewallpaper.plist` to `~/Library/LaunchAgents`
 *This will allow the script to load at device startup*
 
+To change which .mp4 you want just edit the path to the mp4 in `com.me.livewallpaper.plist`
+
 **See instructions below to load/unload**
 
 ## Launch Commands
