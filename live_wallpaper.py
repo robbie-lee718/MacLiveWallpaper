@@ -29,6 +29,8 @@ from AppKit import (
     NSWindowStyleMaskBorderless,
     NSWorkspace,
     NSWorkspaceDidWakeNotification,
+    NSWorkspaceScreensDidWakeNotification,
+    NSWorkspaceSessionDidBecomeActiveNotification,
 )
 from AVFoundation import (
     AVLayerVideoGravityResizeAspectFill,
@@ -69,12 +71,24 @@ class WallpaperController:
 
         # Resume after sleep (only for windows that are actually visible)
         ws_center = NSWorkspace.sharedWorkspace().notificationCenter()
-        self.wake_observer = ws_center.addObserverForName_object_queue_usingBlock_(
-            NSWorkspaceDidWakeNotification,
-            None,
-            NSOperationQueue.mainQueue(),
-            lambda note: self.resume_visible(),
-        )
+        self.wake_observers = []
+        for name in (NSWorkspaceDidWakeNotification,
+                    NSWorkspaceScreensDidWakeNotification,
+                    NSWorkspaceSessionDidBecomeActiveNotification):
+            obs = ws_center.addObserverForName_object_queue_usingBlock_(
+                name, None, NSOperationQueue.mainQueue(),
+                lambda note: self.schedule_rebuild(),
+            )
+            self.wake_observers.append(obs)
+
+
+        def schedule_rebuild(self):
+            self.rebuild_token = getattr(self, "rebuild_token", 0) + 1
+            token = self.rebuild_token
+            def go():
+                if token == self.rebuild_token:
+                    self.build()
+            AppHelper.callLater(2.0, go)
 
     # -- helpers
 
