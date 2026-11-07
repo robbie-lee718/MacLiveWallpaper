@@ -42,6 +42,9 @@ To change which .mp4 you want just edit the path to the mp4 in `com.me.livewallp
 ### See Errors:
 `cat /tmp/livewallpaper.err'
 
+### To make changes
+The best way to make changes is to unload the script, make the changes you want to the plist or the python file and reload the script
+
 
 # Requirements
 - Python
