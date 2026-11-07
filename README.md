@@ -7,6 +7,11 @@ Note: depending on the video (quality, length, etc.) you may experience loss of 
 
 
 # How to Run
+### Create venv and install requirements
+`Python -m venv .venv`
+`source .venv/bin/activate`
+`pip install requirements.txt`
+
 ### Create Folders
 Create a bin folder at `~/bin` (If not already exist)
 Create a Movies folder at `~/Movies` (If not already exist)
@@ -16,6 +21,7 @@ Copy/Move LiveWallpaper Directory into `~/bin`
 Move your .mp4 into `~/Movies`
 
 ### Move launch script
+**IMPORTANT: Change YOU to your users name, and change the python path to the venv's python path**
 Copy/Move `com.me.livewallpaper.plist` to `~/Library/LaunchAgents`
 *This will allow the script to load at device startup*
 
